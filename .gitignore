@@ -45,9 +45,6 @@ src/drive/targets/mobile/res/icons
 src/drive/targets/mobile/res/screens
 src/drive/targets/mobile/icon.png
 src/drive/targets/mobile/store
-src/drive/targets/mobile/package.json
-src/drive/targets/mobile/package-lock.json
-src/drive/targets/mobile/yarn.lock
 
 # fastlane
 src/drive/targets/mobile/fastlane/README.md

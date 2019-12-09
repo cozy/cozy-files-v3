@@ -84,7 +84,6 @@
         <ios-team-id value="3AKXFMV43J" />
     </universal-links>
     <engine name="android" spec="^7.1.4" />
-    <engine name="ios" spec="^4.5.5" />
     <plugin name="cordova-plugin-splashscreen" spec="git+https://github.com/cozy/cordova-plugin-splashscreen.git#e10cadcd07b613f745370ba023ac0c52cf415648" />
     <plugin name="cordova-plugin-whitelist" spec="1.3.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="1.7.0" />
@@ -96,12 +95,10 @@
     <plugin name="cordova-plugin-apprate" spec="~1.3.0" />
     <plugin name="cordova-plugin-device-name" spec="1.3.2" />
     <plugin name="cordova-plugin-sqlite-2" spec="~1.0.4" />
-    <plugin name="de.appplant.cordova.plugin.local-notification" spec="0.8.5" />
     <plugin name="cordova-plugin-customurlscheme" spec="~4.3.0">
         <variable name="URL_SCHEME" value="cozydrive" />
     </plugin>
-    <plugin name="cordova-plugin-localization-strings" spec="https://github.com/cozy/cordova-plugin-localization-strings.git#915d10562f327cf0831690061d8025e6d5404471" />
-    <plugin name="cordova-custom-config" spec="~5.0.2" />
+    <plugin name="cordova-custom-config" spec="~5.1.0" />
     <plugin name="cordova-plugin-filepath" spec="1.3.0" />
     <plugin name="cordova-android-support-gradle-release" spec="2.0.1">
         <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />

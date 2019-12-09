@@ -1,0 +1,100 @@
+{
+  "name": "io.cozy.drive.mobile",
+  "version": "1.18.16",
+  "displayName": "Cozy Drive",
+  "cordova": {
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-appinfo": {},
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-background-fetch": {},
+      "cordova-plugin-ios-no-export-compliance": {},
+      "cordova-plugin-apprate": {},
+      "cordova-plugin-device-name": {},
+      "cordova-plugin-sqlite-2": {},
+      "cordova-plugin-customurlscheme": {
+        "URL_SCHEME": "cozydrive"
+      },
+      "cordova-custom-config": {},
+      "cordova-plugin-filepath": {},
+      "cordova-android-support-gradle-release": {
+        "ANDROID_SUPPORT_VERSION": "27.+"
+      },
+      "cordova-plugin-x-socialsharing": {},
+      "cordova-plugin-safariviewcontroller": {},
+      "cordova-ios-plugin-no-export-compliance": {},
+      "io.cozy.jsbackgroundservice": {},
+      "com-darryncampbell-cordova-plugin-intent": {},
+      "com.lampa.startapp": {},
+      "cordova-plugin-queries-schemes": {},
+      "cordova-plugin-keyboard": {},
+      "cordova-plugin-file-opener2": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-universal-links-plugin": {},
+      "io.cozy.plugins.listlibraryitems": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
+      },
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-plugin-localization-strings": {
+        "TRANSLATION_PATH": "translations/app/"
+      },
+      "cordova-plugin-local-notification": {}
+    }
+  },
+  "dependencies": {
+    "cordova-android": "^7.1.4",
+    "cordova-ios": "^5.0.1",
+    "cordova-js-background-service": "git+https://github.com/cozy/cordova-jsbackgroundservice.git#1.3.0",
+    "cordova-plugin-badge": "^0.8.8",
+    "cordova-plugin-compat": "^1.2.0",
+    "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-globalization": "^1.11.0",
+    "cordova-plugin-list-library-items": "git+https://github.com/cozy/cordova-plugin-list-library-items.git#1.5.2",
+    "cordova-plugin-local-notification": "^0.9.0-beta.2",
+    "cordova-plugin-localization-strings": "^3.2.1",
+    "es6-promise-plugin": "^4.2.2",
+    "plugin": "^0.3.3"
+  },
+  "devDependencies": {
+    "com-darryncampbell-cordova-plugin-intent": "^1.1.8",
+    "com.lampa.startapp": "^0.1.4",
+    "cordova-android-support-gradle-release": "^2.0.1",
+    "cordova-custom-config": "^5.1.0",
+    "cordova-ios-plugin-no-export-compliance": "git+https://github.com/mikaoelitiana/cordova-ios-plugin-no-export-compliance.git#915556bf7713e9733005977af4fa4bfba40f203f",
+    "cordova-plugin-appinfo": "^2.1.1",
+    "cordova-plugin-apprate": "^1.3.0",
+    "cordova-plugin-background-fetch": "^4.0.0",
+    "cordova-plugin-camera": "git+https://github.com/cozy/cordova-plugin-camera.git#bf519ca009eeaec3a47237ee07a09d515cc733df",
+    "cordova-plugin-customurlscheme": "^4.3.0",
+    "cordova-plugin-device-name": "^1.3.2",
+    "cordova-plugin-file": "^4.3.1",
+    "cordova-plugin-file-opener2": "^2.2.1",
+    "cordova-plugin-filepath": "^1.3.0",
+    "cordova-plugin-inappbrowser": "^1.7.0",
+    "cordova-plugin-ios-no-export-compliance": "https://github.com/mikaoelitiana/cordova-ios-plugin-no-export-compliance.git#915556bf7713e9733005977af4fa4bfba40f203f",
+    "cordova-plugin-keyboard": "git+https://github.com/cozy/cordova-plugin-keyboard.git#4fa4850e6f0ea78e1e2ce573ccde5531a2353edb",
+    "cordova-plugin-network-information": "^1.3.2",
+    "cordova-plugin-queries-schemes": "git+https://github.com/cozy/cordova-plugin-queries-schemes.git#f7cc50ec542d7eeab6857e366dceb2f039f5dcd9",
+    "cordova-plugin-safariviewcontroller": "^1.5.4",
+    "cordova-plugin-splashscreen": "git+https://github.com/cozy/cordova-plugin-splashscreen.git#e10cadcd07b613f745370ba023ac0c52cf415648",
+    "cordova-plugin-sqlite-2": "^1.0.6",
+    "cordova-plugin-statusbar": "git+https://github.com/cozy/cordova-plugin-statusbar.git#c7c7011608c9b8a1d3b0d788879198c5ad46e199",
+    "cordova-plugin-whitelist": "^1.3.2",
+    "cordova-plugin-x-socialsharing": "^5.4.7",
+    "cordova-universal-links-plugin": "git+https://github.com/walteram/cordova-universal-links-plugin.git",
+    "io.cozy.jsbackgroundservice": "https://github.com/cozy/cordova-jsbackgroundservice.git#1.3.0",
+    "io.cozy.plugins.listlibraryitems": "https://github.com/cozy/cordova-plugin-list-library-items.git#1.5.2"
+  }
+}

@@ -117,7 +117,11 @@ export const queue = (state = [], action) => {
     case RECEIVE_UPLOAD_ERROR:
     case UPLOAD_PROGRESS:
       return state.map(
-        i => (i.file.name !== action.file.name ? i : item(i, action))
+        i =>
+          i.file.name === action.file.name &&
+          i.file.webkitRelativePath === action.file.webkitRelativePath
+            ? item(i, action)
+            : i
       )
     default:
       return state
@@ -158,11 +162,33 @@ export const processNextFile = (
       const newDir = await uploadDirectory(client, entry, dirID)
       fileUploadedCallback(newDir)
     } else {
-      const uploadedFile = await uploadFile(client, file, dirID, {
-        onUploadProgress: event => {
-          dispatch(uploadProgress(file, event))
-        }
-      })
+      let uploadedFile
+      if (file.webkitRelativePath === '') {
+        uploadedFile = await uploadFile(client, file, dirID, {
+          onUploadProgress: event => {
+            dispatch(uploadProgress(file, event))
+          }
+        })
+      } else {
+        const directoryToUpload = await client.query(
+          client.get('io.cozy.files', dirID)
+        )
+        const relativePathForFile = file.webkitRelativePath.substring(
+          0,
+          file.webkitRelativePath.length - file.name.length - 1
+        )
+        const path =
+          directoryToUpload.data.attributes.path + '/' + relativePathForFile
+        const directoryToUse = await client
+          .collection('io.cozy.files')
+          .createDirectoryByPath(path)
+        uploadedFile = await uploadFile(client, file, directoryToUse.data.id, {
+          onUploadProgress: event => {
+            dispatch(uploadProgress(file, event))
+          }
+        })
+      }
+
       fileUploadedCallback(uploadedFile)
     }
     dispatch({ type: RECEIVE_UPLOAD_SUCCESS, file })

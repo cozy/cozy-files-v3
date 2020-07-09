@@ -184,7 +184,8 @@ class InitAppMobile {
           uploaded: currentState.mobile.mediaBackup.uploaded
         }
       },
-      availableOffline: currentState.availableOffline
+      availableOffline: currentState.availableOffline,
+      cozy: currentState.cozy
     })
   }
 

@@ -1,0 +1,147 @@
+{
+  "name": "Photos",
+  "name_prefix": "Cozy",
+  "slug": "photos",
+  "version": "1.34.0",
+  "type": "webapp",
+  "licence": "AGPL-3.0",
+  "icon": "public/app-icon.svg",
+  "categories": [
+    "cozy"
+  ],
+  "source": "https://github.com/cozy/cozy-drive",
+  "editor": "Cozy",
+  "developer": {
+    "name": "Cozy Cloud",
+    "url": "https://cozy.io"
+  },
+  "langs": [
+    "en",
+    "fr"
+  ],
+  "locales": {
+    "fr": {
+      "short_description": "Cozy Photos est l’application de visualisation et gestion de vos photos sur Cozy.",
+      "long_description": "Avec Cozy Photos vous pourrez :\n- Visualiser toutes les photos présentes dans votre Cozy, classées par date;\n- Organisez vos photos en albums;\n- Partager vos albums avec qui vous le souhaitez.",
+      "screenshots": [
+        "screenshots/fr/screenshot01.jpg",
+        "screenshots/fr/screenshot02.jpg",
+        "screenshots/fr/screenshot03.jpg"
+      ]
+    },
+    "en": {
+      "short_description": "Cozy Photos allows you to view and manage your photos on your Cozy",
+      "long_description": "With Cozy Photos, you can:\n- Get a timeline of all your memories\n- Organize your photos through albums\n- Share albums with just a link",
+      "screenshots": [
+        "screenshots/en/screenshot01.jpg",
+        "screenshots/en/screenshot02.jpg",
+        "screenshots/en/screenshot03.jpg"
+      ]
+    }
+  },
+  "screenshots": [
+    "screenshots/fr/screenshot01.jpg",
+    "screenshots/fr/screenshot02.jpg",
+    "screenshots/fr/screenshot03.jpg"
+  ],
+  "routes": {
+    "/": {
+      "folder": "/",
+      "index": "index.html",
+      "public": false
+    },
+    "/public": {
+      "folder": "/public",
+      "index": "index.html",
+      "public": true
+    }
+  },
+  "services": {
+    "onPhotoUpload": {
+      "type": "node",
+      "file": "services/onPhotoUpload/photos.js",
+      "trigger": "@event io.cozy.files:CREATED:image:class",
+      "debounce": "5m"
+    }
+  },
+  "permissions": {
+    "files": {
+      "description": "Required for photo access",
+      "type": "io.cozy.files",
+      "verbs": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH"
+      ]
+    },
+    "apps": {
+      "description": "Required by the cozy-bar to display the icons of the apps",
+      "type": "io.cozy.apps",
+      "verbs": [
+        "GET",
+        "PUT"
+      ]
+    },
+    "albums": {
+      "description": "Required to manage photos albums",
+      "type": "io.cozy.photos.albums",
+      "verbs": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH"
+      ]
+    },
+    "photos_settings": {
+      "description": "Required to manage photos albums settings",
+      "type": "io.cozy.photos.settings",
+      "verbs": [
+        "GET",
+        "POST",
+        "PUT"
+      ]
+    },
+    "contacts": {
+      "description": "Required to to share photos with your contacts",
+      "type": "io.cozy.contacts",
+      "verbs": [
+        "GET",
+        "POST"
+      ]
+    },
+    "settings": {
+      "description": "Required by the cozy-bar to display Claudy and know which applications are coming soon",
+      "type": "io.cozy.settings",
+      "verbs": [
+        "GET"
+      ]
+    },
+    "oauth": {
+      "description": "Required to display the cozy-desktop banner",
+      "type": "io.cozy.oauth.clients",
+      "verbs": [
+        "GET"
+      ]
+    },
+    "reporting": {
+      "description": "Allow to report unexpected errors to the support team",
+      "type": "cc.cozycloud.sentry",
+      "verbs": [
+        "POST"
+      ]
+    },
+    "triggers": {
+      "description": "Required to re-execute the clustering",
+      "type": "io.cozy.triggers",
+      "verbs": [
+        "POST"
+      ],
+      "selector": "worker",
+      "values": [
+        "service"
+      ]
+    }
+  }
+}

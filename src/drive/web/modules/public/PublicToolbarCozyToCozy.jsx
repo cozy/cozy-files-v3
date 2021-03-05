@@ -8,6 +8,7 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
+import cozyBar from 'lib/cozyBar'
 
 import SelectableItem from 'drive/web/modules/drive/Toolbar/selectable/SelectableItem'
 
@@ -16,7 +17,7 @@ import { SharingBannerCozyToCozy } from 'components/sharing/PublicBanner'
 import { downloadFiles } from 'drive/web/modules/actions/utils'
 import { DownloadFilesButton } from './DownloadButton'
 
-const { BarRight } = cozy.bar
+const { BarRight } = cozyBar
 
 const openExternalLink = url => (window.location = url)
 

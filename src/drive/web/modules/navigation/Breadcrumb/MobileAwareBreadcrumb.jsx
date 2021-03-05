@@ -3,9 +3,10 @@ import React, { useCallback } from 'react'
 import { withBreakpoints } from 'cozy-ui/transpiled/react'
 import BreadCrumb from 'drive/web/modules/navigation/Breadcrumb/Breadcrumb'
 import PreviousButton from 'drive/web/modules/navigation/Breadcrumb/PreviousButton'
+import cozyBar from 'lib/cozyBar'
 
 export const MobileBreadcrumb = props => {
-  const { BarCenter, BarLeft } = cozy.bar
+  const { BarCenter, BarLeft } = cozyBar
   const { onBreadcrumbClick, path } = props
   const navigateBack = useCallback(
     () => {

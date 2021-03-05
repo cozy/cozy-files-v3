@@ -31,6 +31,7 @@ import { configureReporter, setCozyUrl } from 'drive/lib/reporter'
 import getSharedDocument from 'cozy-sharing/dist/getSharedDocument'
 import appMetadata from 'drive/appMetadata'
 import logger from 'lib/logger'
+import cozyBar from 'lib/cozyBar'
 
 import App from 'components/App/App'
 import ExternalRedirect from 'drive/web/modules/navigation/ExternalRedirect'
@@ -42,7 +43,7 @@ const initCozyBar = (data, client) => {
     data.cozyIconPath &&
     data.cozyLocale
   ) {
-    cozy.bar.init({
+    cozyBar.init({
       appName: data.cozyAppName,
       appEditor: data.cozyAppEditor,
       cozyClient: client,

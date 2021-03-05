@@ -15,6 +15,7 @@ import { RealtimePlugin } from 'cozy-realtime'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { I18n } from 'cozy-ui/transpiled/react/I18n'
 import SharingProvider from 'cozy-sharing'
+import cozyBar from 'lib/cozyBar'
 
 import { DOCTYPE_ALBUMS } from 'drive/lib/doctypes'
 
@@ -74,7 +75,7 @@ const setupAppContext = memoize(() => {
   )
   client.setStore(store)
   const locale = data.cozyLocale
-  cozy.bar.init({
+  cozyBar.init({
     appName: data.cozyAppName,
     appEditor: data.cozyAppEditor,
     cozyClient: client,

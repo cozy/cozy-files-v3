@@ -10,8 +10,9 @@ import PropTypes from 'prop-types'
 import flow from 'lodash/flow'
 import SharingProvider from 'cozy-sharing'
 import { DOCTYPE_ALBUMS } from 'drive/lib/doctypes'
+import cozyBar from 'lib/cozyBar'
 
-const { BarCenter, BarRight, BarLeft } = cozy.bar
+const { BarCenter, BarRight, BarLeft } = cozyBar
 
 const KEYCODE_ENTER = 13
 const KEYCODE_ESC = 27

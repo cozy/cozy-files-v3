@@ -9,6 +9,8 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import BarContextProvider from 'cozy-ui/transpiled/react/BarContextProvider'
+import cozyBar from 'lib/cozyBar'
+
 import { ModalContext } from 'drive/lib/ModalContext'
 import { MoreButton } from 'components/Button'
 import EmptyTrashConfirm from './components/EmptyTrashConfirm'
@@ -27,7 +29,7 @@ export const Toolbar = ({
   breakpoints: { isMobile }
 }) => {
   const client = useClient()
-  const { BarRight } = cozy.bar
+  const { BarRight } = cozyBar
   const [menuIsVisible, setMenuVisible] = useState(false)
   const anchorRef = React.createRef()
   const openMenu = useCallback(() => setMenuVisible(true), [setMenuVisible])

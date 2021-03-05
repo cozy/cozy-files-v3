@@ -1,5 +1,5 @@
 /* global cozy */
-const { BarRight } = cozy.bar
+
 
 import React, { useCallback, useState } from 'react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -9,6 +9,8 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { Button, ButtonLink, Icon } from 'cozy-ui/transpiled/react'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import { useClient } from 'cozy-client'
+import cozyBar from 'lib/cozyBar'
+
 import getHomeLinkHref from 'components/Button/getHomeLinkHref'
 import CozyHomeLinkIcon from 'components/Button/CozyHomeLinkIcon'
 import { SharingBannerByLink } from 'components/sharing/PublicBanner'
@@ -21,7 +23,7 @@ import UploadItem from 'drive/web/modules/drive/Toolbar/components/UploadItem'
 import CreateShortcut from 'drive/web/modules/drive/Toolbar/components/CreateShortcut'
 
 import { downloadFiles } from 'drive/web/modules/actions/utils'
-
+const { BarRight } = cozyBar
 const isFilesIsFile = files => files.length === 1 && files[0].type === 'file'
 
 const CreateCozyButton = ({ from, size }) => {

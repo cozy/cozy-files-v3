@@ -11,6 +11,8 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import BarContextProvider from 'cozy-ui/transpiled/react/BarContextProvider'
 import { withClient } from 'cozy-client'
+import cozyBar from 'lib/cozyBar'
+
 import { isSelectionBarVisible } from 'drive/web/modules/selection/duck'
 
 import styles from 'drive/styles/toolbar.styl'
@@ -67,7 +69,7 @@ class Toolbar extends Component {
     if (disabled) {
       return null
     }
-    const { BarRight } = cozy.bar
+    const { BarRight } = cozyBar
 
     return (
       <div

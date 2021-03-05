@@ -7,6 +7,9 @@ import {
   shouldEnableTracking,
   getTracker
 } from 'cozy-ui/transpiled/react/helpers/tracker'
+
+import cozyBar from 'lib/cozyBar'
+
 import { configureReporter, setCozyUrl } from 'drive/lib/reporter'
 import registerClientPlugins from 'drive/lib/registerClientPlugins'
 
@@ -53,7 +56,7 @@ const setupApp = memoize(() => {
     token: data.cozyToken
   })
 
-  cozy.bar.init({
+  cozyBar.init({
     appName: data.cozyAppName,
     appEditor: data.cozyAppEditor,
     cozyClient: client,

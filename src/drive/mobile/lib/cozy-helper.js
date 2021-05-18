@@ -2,7 +2,7 @@
 import { LocalStorage as Storage } from 'cozy-client-js'
 import CozyClient, { StackLink } from 'cozy-client'
 import PouchLink from 'cozy-pouch-link'
-import { isMobileApp, isIOSApp, getDeviceName } from 'cozy-device-helper'
+import { isMobileApp, getDeviceName } from 'cozy-device-helper'
 import { SOFTWARE_ID, SOFTWARE_NAME } from './constants'
 import { disableBackgroundService } from './background'
 import { schema, DOCTYPE_FILES } from 'drive/lib/doctypes'
@@ -54,11 +54,11 @@ export const initClient = url => {
     initialSync: true
   }
 
-  if (isMobileApp() && isIOSApp()) {
+  if (isMobileApp()) {
     pouchLinkOptions.pouch = {
-      plugins: [require('pouchdb-adapter-cordova-sqlite')],
+      plugins: [require('pouchdb-adapter-indexeddb').default],
       options: {
-        adapter: 'cordova-sqlite',
+        adapter: 'indexeddb',
         location: 'default'
       }
     }

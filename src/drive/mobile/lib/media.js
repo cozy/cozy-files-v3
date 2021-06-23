@@ -1,4 +1,3 @@
-import { getToken, getClientUrl } from './cozy-helper'
 import { logException } from 'drive/lib/reporter'
 import { isMobileApp } from 'cozy-device-helper'
 import logger from 'lib/logger'
@@ -49,9 +48,10 @@ const generatePayloadForNative = async ({
   uri,
   file,
   method = 'POST',
-  id = undefined
+  id = undefined,
+  client
 }) => {
-  const token = await getToken()
+  const token = client.getStackClient().getAccessToken()
   const payload = {
     id,
     serverUrl: uri,
@@ -89,16 +89,18 @@ export const updateLibraryItem = async (
   previousDocument,
   libraryItem,
   progressCallback,
-  thumbnailCallback
+  thumbnailCallback,
+  client
 ) => {
   if (hasCordovaPlugin()) {
+    const cozyURI = client.getStackClient().uri
     // the cordova plugin is going to do the upload and needs all the infos to make a request to the stack
-    const uri =
-      getClientUrl() + '/files/' + encodeURIComponent(previousDocument._id)
+    const uri = cozyURI + '/files/' + encodeURIComponent(previousDocument._id)
     const payload = await generatePayloadForNative({
       uri,
       file: libraryItem,
-      method: 'PUT'
+      method: 'PUT',
+      client
     })
     return uploadNativeItem(payload, progressCallback, thumbnailCallback)
   }
@@ -108,11 +110,13 @@ export const uploadLibraryItem = async (
   dirID,
   libraryItem,
   progressCallback,
-  thumbnailCallback
+  thumbnailCallback,
+  client
 ) => {
+  const cozyURI = client.getStackClient().uri
   if (hasCordovaPlugin()) {
     const uri =
-      getClientUrl() +
+      cozyURI +
       '/files/' +
       encodeURIComponent(dirID) +
       '?Name=' +
@@ -121,7 +125,8 @@ export const uploadLibraryItem = async (
     const payload = await generatePayloadForNative({
       id: dirID,
       file: libraryItem,
-      uri
+      uri,
+      client
     })
     return uploadNativeItem(payload, progressCallback, thumbnailCallback)
   }

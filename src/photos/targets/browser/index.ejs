@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="{{.Locale}}">
-  <head>
-    <meta charset="utf-8" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    {{.ThemeCSS}}
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
-    <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta
-      name="viewport"
-      content="width=device-width, height=device-height, initial-scale=1, viewport-fit=cover"
-    />
-    <% _.forEach(htmlWebpackPlugin.files.css, function(file) { %>
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  {{.ThemeCSS}}
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+  <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, viewport-fit=cover" />
+  <% _.forEach(htmlWebpackPlugin.files.css, function(file) { %>
     <link rel="stylesheet" href="<%- file %>" />
-    <% }); %> <% if (__STACK_ASSETS__) { %>
-    {{.CozyClientJS}}
-    {{.CozyBar}}
-    <% } %>
-  </head>
-  <div
-    role="application"
-    data-cozy="{{.CozyData}}"
-  ></div>
-  <% _.forEach(htmlWebpackPlugin.files.js, function(file) { %>
+    <% }); %>
+      <% if (__STACK_ASSETS__) { %>
+        {{.CozyBar}}
+        <% } %>
+</head>
+<div role="application" data-cozy="{{.CozyData}}"></div>
+<% _.forEach(htmlWebpackPlugin.files.js, function(file) { %>
   <script src="<%- file %>"></script>
   <% }); %>
-  <script src="//{{.Domain}}/assets/js/piwik.js" async></script>
+    <script src="//{{.Domain}}/assets/js/piwik.js" async></script>
+
 </html>

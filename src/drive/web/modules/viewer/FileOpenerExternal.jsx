@@ -56,6 +56,7 @@ export class FileOpener extends Component {
     }
   }
   async loadFileInfo(id) {
+    const { client } = this.props
     try {
       this.setState({ fileNotFound: false })
       const resp = await client.query(Q('io.cozy.files').get(id))

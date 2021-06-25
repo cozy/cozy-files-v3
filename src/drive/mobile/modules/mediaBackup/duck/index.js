@@ -41,7 +41,7 @@ export const startMediaBackup = (isManualBackup = false) => async (
   { client, t }
 ) => {
   dispatch({ type: MEDIA_UPLOAD_START })
-  client.getStackClient().fetchJSON('POST', '/settings/synchronized')
+  await client.getStackClient().fetchJSON('POST', '/settings/synchronized')
   if (!(await isAuthorized())) {
     const promptForPermissions = isManualBackup
     const receivedAuthorisation = await updateValueAfterRequestAuthorization(
@@ -81,7 +81,7 @@ export const startMediaBackup = (isManualBackup = false) => async (
         }
       }
 
-      client.getStackClient().fetchJSON('POST', '/settings/synchronized')
+      await client.getStackClient().fetchJSON('POST', '/settings/synchronized')
     } catch (e) {
       dispatch({ type: MEDIA_UPLOAD_ABORT })
       if (!e.message.match(/Failed to fetch/))

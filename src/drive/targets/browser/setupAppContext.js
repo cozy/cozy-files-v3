@@ -50,11 +50,6 @@ const setupApp = memoize(() => {
     history
   })
 
-  cozy.client.init({
-    cozyURL: cozyUrl,
-    token: data.token
-  })
-
   cozy.bar.init({
     appName: data.app.name,
     appEditor: data.app.editor,

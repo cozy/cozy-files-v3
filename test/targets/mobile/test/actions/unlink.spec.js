@@ -1,6 +1,4 @@
 /* eslint-env jest */
-/* global cozy */
-
 import {
   SHOW_UNLINK_CONFIRMATION,
   HIDE_UNLINK_CONFIRMATION,
@@ -8,12 +6,6 @@ import {
   hideUnlinkConfirmation,
   unlink
 } from '../../../../../src/targets/mobile/actions/unlink'
-
-import client from 'cozy-client-js'
-
-beforeAll(() => {
-  cozy.client = client
-})
 
 describe('ui actions', () => {
   it('should create an action to display unlink confirmation', () => {

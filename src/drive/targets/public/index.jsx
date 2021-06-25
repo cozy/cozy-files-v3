@@ -85,11 +85,6 @@ const init = async () => {
 
   configureReporter()
   setCozyUrl(cozyUrl)
-  // we still need cozy-client-js for opening a folder
-  cozy.client.init({
-    cozyURL: cozyUrl,
-    token: sharecode
-  })
 
   const polyglot = initTranslation(dataset.locale, lang =>
     require(`drive/locales/${lang}`)

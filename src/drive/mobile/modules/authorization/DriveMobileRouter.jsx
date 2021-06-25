@@ -10,7 +10,7 @@ import { IconSprite } from 'cozy-ui/transpiled/react/'
 
 import AppRoute from 'drive/web/modules/navigation/AppRoute'
 import { setUrl } from 'drive/mobile/modules/settings/duck'
-import { restoreCozyClientJs, initBar } from 'drive/mobile/lib/cozy-helper'
+import { initBar } from 'drive/mobile/lib/cozy-helper'
 import { unlink } from './duck/index'
 import { saveCredentials } from './sagas'
 import { setCozyUrl } from 'drive/lib/reporter'
@@ -35,11 +35,6 @@ class DriveMobileRouter extends Component {
   initClientAndBar = async client => {
     const { saveServerUrl, saveCredentials } = this.props
     const accesstoken = client.getStackClient().token
-    restoreCozyClientJs(
-      client.getStackClient().uri,
-      client.getStackClient().oauthOptions,
-      client.getStackClient().token
-    )
     saveCredentials(client.getStackClient().oauthOptions, accesstoken)
     saveServerUrl(client.getStackClient().uri)
     await initBar(client)

@@ -11,7 +11,7 @@ import { translate } from 'cozy-ui/transpiled/react'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { unlink, getClientSettings } from './duck'
+import { unlink } from './duck'
 import tosIcon from 'drive/mobile/assets/icons/icon-tos.svg'
 
 const TosUpdatedModal = translate()(({ t, newTosLink, onAccept, onRefuse }) => {
@@ -128,15 +128,11 @@ class UserActionRequired extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  clientSettings: getClientSettings(state)
-})
-
 const mapDispatchToProps = dispatch => ({
-  unlink: (client, clientSettings) => dispatch(unlink(client, clientSettings))
+  unlink: client => dispatch(unlink(client))
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(UserActionRequired)

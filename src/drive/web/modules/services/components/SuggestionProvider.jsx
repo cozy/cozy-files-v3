@@ -1,5 +1,6 @@
-/* global cozy */
 import React from 'react'
+import { withClient } from 'cozy-client'
+
 import FuzzyPathSearch from '../FuzzyPathSearch'
 import { getFileMimetype } from 'drive/lib/getFileMimetype'
 
@@ -48,10 +49,8 @@ class SuggestionProvider extends React.Component {
   // fetches pretty much all the files and preloads FuzzyPathSearch
   async indexFiles() {
     return new Promise(async resolve => {
-      const resp = await cozy.client.fetchJSON(
-        'GET',
-        `/data/io.cozy.files/_all_docs?include_docs=true`
-      )
+      const { client } = this.props
+      const resp = await client.collection('io.cozy.files').all({ limit: null })
       const files = resp.rows
         .filter(row => !row.doc.hasOwnProperty('views'))
         .map(row => ({ id: row.id, ...row.doc }))
@@ -127,4 +126,4 @@ function getIconUrl(file) {
   }' x='0' y='0' width='32' height='32'/></svg>`.replace(/#/g, '%23')
 }
 
-export default SuggestionProvider
+export default withClient(SuggestionProvider)

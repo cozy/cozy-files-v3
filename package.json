@@ -137,7 +137,7 @@
     "localforage": "1.7.3",
     "lodash": "4.17.21",
     "log-prefix": "0.1.1",
-    "mime-types": "2.1.24",
+    "mime-types": "2.1.31",
     "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
     "node-fetch": "2.6.1",
     "node-polyglot": "2.4.0",

@@ -148,7 +148,7 @@
     "pouchdb-debug": "^7.2.1",
     "prop-types": "15.7.2",
     "propagating-hammerjs": "^2.0.1",
-    "raven-js": "3.26.4",
+    "raven-js": "3.27.2",
     "react": "16.14.0",
     "react-autosuggest": "9.3.4",
     "react-dom": "16.14.0",

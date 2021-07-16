@@ -1,5 +1,3 @@
-/* global cozy */
-
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import 'whatwg-fetch'
 
@@ -31,10 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     schema
   })
 
-  cozy.client.init({
-    cozyURL: cozyUrl,
-    token: data.token
-  })
   registerClientPlugins(client)
 
   render(

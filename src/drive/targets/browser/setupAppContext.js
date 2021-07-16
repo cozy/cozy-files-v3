@@ -1,20 +1,21 @@
 /* global cozy */
-
 import memoize from 'lodash/memoize'
-import { initTranslation } from 'cozy-ui/transpiled/react/I18n'
+import { hashHistory } from 'react-router'
+
 import CozyClient from 'cozy-client'
+import { Document } from 'cozy-doctypes'
+import { Intents } from 'cozy-interapp'
 import {
   shouldEnableTracking,
   getTracker
 } from 'cozy-ui/transpiled/react/helpers/tracker'
+import { initTranslation } from 'cozy-ui/transpiled/react/I18n'
+
 import { configureReporter, setCozyUrl } from 'drive/lib/reporter'
 import registerClientPlugins from 'drive/lib/registerClientPlugins'
-
 import appMetadata from 'drive/appMetadata'
 import configureStore from 'drive/store/configureStore'
 import { schema } from 'drive/lib/doctypes'
-import { Document } from 'cozy-doctypes'
-import { hashHistory } from 'react-router'
 
 const setupApp = memoize(() => {
   const root = document.querySelector('[role=application]')
@@ -49,11 +50,6 @@ const setupApp = memoize(() => {
     history
   })
 
-  cozy.client.init({
-    cozyURL: cozyUrl,
-    token: data.token
-  })
-
   cozy.bar.init({
     appName: data.app.name,
     appEditor: data.app.editor,
@@ -64,6 +60,9 @@ const setupApp = memoize(() => {
     appSlug: data.app.slug,
     appNamePrefix: data.app.prefix
   })
+
+  const intents = new Intents({ client })
+  client.intents = intents
 
   if (shouldEnableTracking() && getTracker()) {
     let trackerInstance = getTracker()

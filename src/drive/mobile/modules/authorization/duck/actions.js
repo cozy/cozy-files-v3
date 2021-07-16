@@ -11,10 +11,10 @@ export const setToken = token => ({ type: SET_TOKEN, token })
 
 export const revokeClient = () => ({ type: REVOKE })
 
-export const unlink = (client, clientInfo) => async dispatch => {
+export const unlink = client => async dispatch => {
   client.logout()
 
-  resetClient(client, clientInfo)
+  resetClient(client)
 
   await resetPersistedState()
   // This action will be handled by the rootReducer: the store will be restored to its initial state

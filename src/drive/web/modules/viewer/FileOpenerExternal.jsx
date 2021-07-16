@@ -1,4 +1,3 @@
-/* global cozy */
 /**
  * This component was previously named FileOpener
  * It has been renamed since it is used in :
@@ -12,6 +11,7 @@ import { withRouter } from 'react-router'
 import get from 'lodash/get'
 import { RemoveScroll } from 'react-remove-scroll'
 
+import { withClient, Q } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -56,9 +56,10 @@ export class FileOpener extends Component {
     }
   }
   async loadFileInfo(id) {
+    const { client } = this.props
     try {
       this.setState({ fileNotFound: false })
-      const resp = await cozy.client.files.statById(id, false)
+      const resp = await client.query(Q('io.cozy.files').get(id))
       const file = { ...resp, ...resp.attributes, id: resp._id }
       this.setState({ file, loading: false })
     } catch (e) {
@@ -121,4 +122,4 @@ FileOpener.propTypes = {
   fileId: PropTypes.string
 }
 
-export default translate()(withRouter(FileOpener))
+export default translate()(withClient(withRouter(FileOpener)))

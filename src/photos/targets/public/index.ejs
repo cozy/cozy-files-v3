@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{.Locale}}">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,17 @@
   {{.ThemeCSS}}
   <% _.forEach(htmlWebpackPlugin.files.css, function(file) { %>
     <link rel="stylesheet" href="<%- file %>">
-  <% }); %>
-  <% if (__STACK_ASSETS__) { %>
-    {{.CozyClientJS}}
-    {{.CozyBar}}
-  <% } %>
+    <% }); %>
+      <% if (__STACK_ASSETS__) { %>
+        {{.CozyBar}}
+        <% } %>
 </head>
+
 <body>
-  <div
-    role="application"
-    data-cozy="{{.CozyData}}"
-  >
-  <% _.forEach(htmlWebpackPlugin.files.js, function(file) { %>
-    <script src="<%- file %>"></script>
-  <% }); %>
+  <div role="application" data-cozy="{{.CozyData}}">
+    <% _.forEach(htmlWebpackPlugin.files.js, function(file) { %>
+      <script src="<%- file %>"></script>
+      <% }); %>
 </body>
+
 </html>

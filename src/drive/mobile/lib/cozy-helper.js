@@ -1,5 +1,4 @@
 /* global cozy */
-import { LocalStorage as Storage } from 'cozy-client-js'
 import CozyClient, { StackLink } from 'cozy-client'
 import PouchLink from 'cozy-pouch-link'
 import { isMobileApp, isIOSApp, getDeviceName } from 'cozy-device-helper'
@@ -94,48 +93,13 @@ export const initBar = async client => {
   })
 }
 
-export const restoreCozyClientJs = (uri, clientInfos, token) => {
-  const offline = { doctypes: ['io.cozy.files'] }
-  cozy.client.init({
-    cozyURL: uri,
-    oauth: {
-      storage: new Storage(),
-      clientParams: {
-        ...clientInfos,
-        scopes: token.scope
-      }
-    },
-    offline
-  })
-
-  cozy.client.saveCredentials(clientInfos, token)
-}
-
-export function resetClient(client, clientInfo = null) {
-  if (clientInfo && cozy.client.auth.unregisterClient) {
-    cozy.client.auth.unregisterClient(clientInfo)
-  }
+export function resetClient(client) {
   // reset cozy-bar
   if (document.getElementById('coz-bar')) {
     document.getElementById('coz-bar').remove()
   }
-  // reset pouchDB
-  if (cozy.client.offline.destroyAllDatabase) {
-    cozy.client.offline.destroyAllDatabase()
-  }
   // reset cozy-client
   client.getStackClient().resetClient()
-  // reset cozy-client-js
-  if (cozy.client._storage) {
-    cozy.client._storage.clear()
-  }
 
   disableBackgroundService()
 }
-
-export const getToken = async () => {
-  const credentials = await cozy.client.authorize()
-  return credentials.token.accessToken
-}
-
-export const getClientUrl = () => cozy.client._url

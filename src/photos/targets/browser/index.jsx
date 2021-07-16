@@ -47,11 +47,6 @@ const setupAppContext = memoize(() => {
     store: false
   })
   client.registerPlugin(RealtimePlugin)
-  // We still need to init cozy-client-js for the Uploader
-  cozy.client.init({
-    cozyURL: cozyUrl,
-    token: data.token
-  })
 
   configureReporter()
   setCozyUrl(cozyUrl)

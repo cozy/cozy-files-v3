@@ -46,7 +46,7 @@ $ yarn install
 
 :pushpin: If you use a node environment wrapper like [nvm] or [ndenv], don't forget to set your local node version `8` before doing a `yarn install`.
 
-:warning: During its early ages, _cozy-drive_ uses beta versions of [cozy-ui] and [cozy-client-js], take a look at the ["living on the edge" note](#living-on-the-edge) below to know hot to install and configure the latest available versions.
+_cozy-drive_ uses [cozy-ui] and [cozy-client], take a look at the ["living on the edge" note](#living-on-the-edge) below to know hot to install and configure the latest available versions.
 
 Cozy's apps use a standard set of _npm scripts_ to run common tasks, like watch, lint, test, build…
 
@@ -97,7 +97,7 @@ yarn link cozy-ui
 
 You can now run the watch task and your project will hot-reload each times a cozy-ui source file is touched.
 
-[Cozy-client-js] is our API library that provides an unified API on top of the cozy-stack. If you need to develop / hack cozy-client-js in parallel of your application, you can use the same trick that we used with [cozy-ui]: yarn linking.
+[Cozy-client] is our API library that provides an unified API on top of the cozy-stack. If you need to develop / hack cozy-client in parallel of your application, you can use the same trick that we used with [cozy-ui]: yarn linking.
 
 
 ### Tests
@@ -156,7 +156,7 @@ Cozy Drive is developed by Cozy Cloud and distributed under the [AGPL v3 license
 [yarn]: https://yarnpkg.com/
 [yarn-install]: https://yarnpkg.com/en/docs/install
 [cozy-ui]: https://github.com/cozy/cozy-ui
-[cozy-client-js]: https://github.com/cozy/cozy-client-js/
+[cozy-client]: https://github.com/cozy/cozy-client/
 [cozy-stack-docker]: https://github.com/cozy/cozy-stack/blob/master/docs/client-app-dev.md#with-docker
 [doctypes]: https://cozy.github.io/cozy-doctypes/
 [bill-doctype]: https://github.com/cozy/cozy-konnector-libs/blob/master/models/bill.js

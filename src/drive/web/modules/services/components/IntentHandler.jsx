@@ -1,5 +1,6 @@
-/* global cozy */
 import React from 'react'
+
+import { withClient } from 'cozy-client'
 
 import Embeder from './Embeder'
 import URLGetter from './URLGetter'
@@ -21,13 +22,13 @@ class IntentHandler extends React.Component {
   }
 
   async startService() {
-    const { intentId } = this.props
+    const { intentId, client } = this.props
 
     let component
     let service
     let intent
     try {
-      service = await cozy.client.intents.createService(intentId, window)
+      service = await client.intents.createService(intentId, window)
       intent = service.getIntent()
 
       if (
@@ -66,4 +67,4 @@ class IntentHandler extends React.Component {
   }
 }
 
-export default IntentHandler
+export default withClient(IntentHandler)

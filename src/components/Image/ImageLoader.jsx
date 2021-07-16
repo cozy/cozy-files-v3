@@ -1,9 +1,8 @@
-/* global cozy */
 import React from 'react'
 import PropTypes from 'prop-types'
 import logger from 'lib/logger'
 
-import { withClient } from 'cozy-client'
+import { withClient, Q } from 'cozy-client'
 
 const TTL = 10000
 
@@ -96,9 +95,9 @@ class ImageLoader extends React.Component {
   async getFileLinks(file) {
     if (file.links) return file.links
     else {
-      const response = await cozy.client.files.statById(
-        this.getFileId(file),
-        false
+      const { client } = this.props
+      const response = await client.query(
+        Q('io.cozy.files').get(this.getFileId(file))
       )
       if (!response.links) throw new Error('Could not fetch file links')
       return response.links

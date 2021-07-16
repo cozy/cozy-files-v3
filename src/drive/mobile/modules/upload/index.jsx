@@ -52,13 +52,19 @@ export class DumbUpload extends Component {
     const { items, folderId } = this.state
     const { router, uploadFilesFromNative } = this.props
     const filesForQueue = generateForQueue(items)
-    uploadFilesFromNative(filesForQueue, folderId, this.callbackSuccess)
+    uploadFilesFromNative(filesForQueue, folderId, this.callbackSuccess, this.callbackError)
     //just to be sure that first dispatch of uploadFilesFromNative was done
     //we replace the URL to be sure that even with the back button on Android
     //we don't arrive on this component
     setTimeout(() => router.replace(`/folder/${folderId}`), 50)
   }
-
+  callbackError = () => {
+    const { t, startMediaBackup } = this.props
+    Alerter.success(t('ImportToDrive.error'))
+    localforage.removeItem('importedFiles')
+    startMediaBackup()
+  }
+  
   callbackSuccess = () => {
     const { items } = this.state
     const { t, startMediaBackup } = this.props

@@ -317,8 +317,10 @@ export const overwriteFile = async (client, file, path, options = {}) => {
 export const uploadFilesFromNative = (
   files,
   folderId,
-  uploadFilesSuccessCallback
+  uploadFilesSuccessCallback,
+  callbackError
 ) => async dispatch => {
+  let hasError = false
   dispatch({
     type: ADD_TO_UPLOAD_QUEUE,
     files: files
@@ -337,13 +339,16 @@ export const uploadFilesFromNative = (
       )
       dispatch(removeFileToUploadQueue(file.file))
     } catch (error) {
+      hasError = true
       logger.error(
         `Uploading files from native failed with file ${file.file}: ${error}`
       )
+      dispatch({ type: RECEIVE_UPLOAD_ERROR, file, status })
     }
   }
 
-  if (uploadFilesSuccessCallback) uploadFilesSuccessCallback()
+  if (!hasError && uploadFilesSuccessCallback) uploadFilesSuccessCallback()
+  if (hasError && callbackError) callbackError()
 }
 
 export const removeFileToUploadQueue = file => async dispatch => {

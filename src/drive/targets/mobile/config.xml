@@ -120,7 +120,7 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
     <plugin name="cordova-universal-links-plugin" spec="git+https://github.com/walteram/cordova-universal-links-plugin.git" />
-    <plugin name="io.cozy.plugins.listlibraryitems" spec="https://github.com/cozy/cordova-plugin-list-library-items.git#1.5.3">
+    <plugin name="io.cozy.plugins.listlibraryitems" spec="https://github.com/cozy/cordova-plugin-list-library-items.git#1.5.5">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="https://github.com/cozy/cordova-plugin-camera.git#bf519ca009eeaec3a47237ee07a09d515cc733df">

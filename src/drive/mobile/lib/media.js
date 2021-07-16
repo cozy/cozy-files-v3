@@ -2,7 +2,7 @@ import { getToken, getClientUrl } from './cozy-helper'
 import { logException } from 'drive/lib/reporter'
 import { isMobileApp } from 'cozy-device-helper'
 import logger from 'lib/logger'
-
+import { version } from '../../../../package.json'
 const hasCordovaPlugin = () => {
   return (
     isMobileApp() &&
@@ -62,7 +62,8 @@ const generatePayloadForNative = async ({
     httpMethod: method,
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': file['mimeType']
+      'Content-Type': file['mimeType'],
+      'User-Agent': `io.cozy.drive.mobile-${version}`
     }
   }
   return payload

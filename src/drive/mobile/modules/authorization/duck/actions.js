@@ -11,8 +11,8 @@ export const setToken = token => ({ type: SET_TOKEN, token })
 
 export const revokeClient = () => ({ type: REVOKE })
 
-export const unlink = (client, clientInfo) => async dispatch => {
-  client.logout()
+export const unlink = async (client, clientInfo) => async dispatch => {
+  await client.logout()
 
   resetClient(client, clientInfo)
 

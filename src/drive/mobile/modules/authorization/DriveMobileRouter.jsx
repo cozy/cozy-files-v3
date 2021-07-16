@@ -69,8 +69,8 @@ class DriveMobileRouter extends Component {
     }
   }
 
-  afterLogout = () => {
-    this.props.unlink(this.props.client)
+  afterLogout = async () => {
+    await this.props.unlink(this.props.client)
     this.props.history.replace('/')
   }
 

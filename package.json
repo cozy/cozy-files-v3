@@ -77,7 +77,7 @@
     "@testing-library/react-hooks": "3.7.0",
     "@welldone-software/why-did-you-render": "^6.1.4",
     "babel-core": "7.0.0-bridge.0",
-    "chrome-remote-interface": "0.27.1",
+    "chrome-remote-interface": "0.31.0",
     "cordova": "7.1.0",
     "cordova-android": "7.1.4",
     "cozy-jobs-cli": "1.15.9",

@@ -13019,10 +13019,10 @@ pouchdb-abstract-mapreduce@7.2.2:
     pouchdb-md5 "7.2.2"
     pouchdb-utils "7.2.2"
 
-pouchdb-adapter-cordova-sqlite@^2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/pouchdb-adapter-cordova-sqlite/-/pouchdb-adapter-cordova-sqlite-2.0.7.tgz#6928309660d9d2327680dda6a8dfbb0fb955dc6c"
-  integrity sha512-/rRSaJYm6zGpTeSuV3zcNwJ7KxbH5Zao8LAjy9XZur5QxXPrTUf/P7DGE0AmCXJl0e0ItGokjiYXUZRWfdrHpA==
+pouchdb-adapter-cordova-sqlite@2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/pouchdb-adapter-cordova-sqlite/-/pouchdb-adapter-cordova-sqlite-2.0.8.tgz#c9dce809385a16d35199afb17fdd380dac38f100"
+  integrity sha512-7mGeloXHtpR0QEe+Q0XCombKx5BPfy+kk3Y9C2uX60WYf6cwygS+LsQWFnSgHJ/3PQCdHCNJ2n4QC4KneyZZXw==
   dependencies:
     pouchdb-adapter-websql-core "^7.0.0"
 

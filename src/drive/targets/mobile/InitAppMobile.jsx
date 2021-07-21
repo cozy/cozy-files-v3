@@ -106,7 +106,7 @@ class InitAppMobile {
   getClient = async () => {
     if (this.client) return this.client
     const cozyURL = await this.getCozyURL()
-    this.client = initClient(cozyURL)
+    this.client = await initClient(cozyURL)
 
     if (!Document.cozyClient) {
       Document.registerClient(this.client)
@@ -125,11 +125,11 @@ class InitAppMobile {
 
   getStore = async () => {
     if (this.store) return this.store
-    const client = await this.getClient()
+    const client = this.client || (await this.getClient())
     const polyglot = this.getPolyglot()
     const persistedState = await this.getPersistedState()
     this.store = configureStore({
-      client: client,
+      client,
       t: polyglot.t.bind(polyglot),
       initialState: persistedState,
       history: hashHistory
@@ -254,8 +254,9 @@ class InitAppMobile {
   startApplication = async () => {
     if (this.stardedApp) return
 
-    const store = await this.getStore()
     const client = await this.getClient()
+    const store = await this.getStore()
+
     registerClientPlugins(client)
     const polyglot = await this.getPolyglot()
     //needed to migrate from cozy-drive auth to cozy-authenticate.
@@ -273,6 +274,7 @@ class InitAppMobile {
     }
 
     const root = document.querySelector('[role=application]')
+
     render(
       <App lang={getLang()} polyglot={polyglot} client={client} store={store}>
         <DriveMobileRouter history={hashHistory} />

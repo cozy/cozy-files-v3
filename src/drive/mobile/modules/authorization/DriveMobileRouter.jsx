@@ -6,11 +6,18 @@ import localForage from 'localforage'
 import { MobileRouter } from 'cozy-authentication'
 import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
 import { withClient } from 'cozy-client'
+import PouchLink from 'cozy-pouch-link'
 import { IconSprite } from 'cozy-ui/transpiled/react/'
 
 import AppRoute from 'drive/web/modules/navigation/AppRoute'
 import { setUrl } from 'drive/mobile/modules/settings/duck'
-import { restoreCozyClientJs, initBar } from 'drive/mobile/lib/cozy-helper'
+import {
+  restoreCozyClientJs,
+  initBar,
+  getOldAdapterName,
+  getAdapterPlugin,
+  shouldMigrateAdapter
+} from 'drive/mobile/lib/cozy-helper'
 import { unlink } from './duck/index'
 import { saveCredentials } from './sagas'
 import { setCozyUrl } from 'drive/lib/reporter'
@@ -18,17 +25,21 @@ import { ONBOARDED_ITEM } from 'drive/mobile/modules/onboarding/OnBoarding'
 import { PROTOCOL, SOFTWARE_NAME } from 'drive/mobile/lib/constants'
 import appMetadata from 'drive/appMetadata'
 import migrateOfflineFiles from 'drive/targets/mobile/migrations/migrationOfflineFiles'
+import { MigrateAdapter } from 'drive/targets/mobile/migrations/MigrateAdapter'
 import appBooted from 'drive/targets/mobile'
 
 class DriveMobileRouter extends Component {
   state = {
-    isAppBooted: false
+    isAppBooted: false,
+    shouldDisplayMigrate: false
   }
   async componentDidMount() {
     //Wait for the app to be booted to avoid race condition between cordova & JS
     await appBooted
+    const shouldMigrate = await shouldMigrateAdapter()
     this.setState({
-      isAppBooted: true
+      isAppBooted: true,
+      shouldDisplayMigrate: shouldMigrate
     })
   }
 
@@ -74,11 +85,35 @@ class DriveMobileRouter extends Component {
     this.props.history.replace('/')
   }
 
+  shouldMigrateAdapter = async shouldMigrate => {
+    this.setState({ shouldDisplayMigrate: false })
+    if (shouldMigrate) {
+      const { client } = this.props
+      const pouchLink = client.links.find(link => {
+        return link instanceof PouchLink
+      })
+      const creds = await localForage.getItem('credentials')
+      const url = creds.uri
+      const oldAdapter = getOldAdapterName()
+      const oldAdapterPlugin = getAdapterPlugin(oldAdapter)
+      const newAdapterPlugin = getAdapterPlugin('indexeddb')
+      const plugins = [oldAdapterPlugin, newAdapterPlugin]
+      await pouchLink.migrateAdapter({
+        from: oldAdapter,
+        to: 'indexeddb',
+        url,
+        plugins
+      })
+    }
+  }
+
   render() {
-    const { isAppBooted } = this.state
+    const { isAppBooted, shouldDisplayMigrate } = this.state
     if (!isAppBooted) return null
     const { history } = this.props
-    return (
+    return shouldDisplayMigrate ? (
+      <MigrateAdapter shouldMigrateAdapter={this.shouldMigrateAdapter} />
+    ) : (
       <div style={{ flex: '1' }}>
         <MobileRouter
           protocol={PROTOCOL}

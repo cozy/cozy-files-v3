@@ -13,6 +13,8 @@ import {
   buildDriveQuery,
   buildFolderQuery
 } from 'drive/web/modules/queries'
+import { ONBOARDED_ITEM } from 'drive/mobile/modules/onboarding/OnBoarding'
+import localForage from 'localforage'
 
 export const getLang = () =>
   navigator && navigator.language ? navigator.language.slice(0, 2) : 'en'
@@ -31,8 +33,50 @@ export const getOauthOptions = () => {
   }
 }
 
-export const initClient = url => {
+export const getOldAdapterName = () => {
+  return isMobileApp() && isIOSApp ? 'cordova-sqlite' : 'idb'
+}
+
+export const getAdapterPlugin = adapterName => {
+  if (adapterName === 'cordova-sqlite') {
+    return require('pouchdb-adapter-cordova-sqlite')
+  }
+  if (adapterName === 'idb') {
+    return require('pouchdb-adapter-idb')
+  }
+  return require('pouchdb-adapter-indexeddb').default
+}
+
+export const shouldMigrateAdapter = async () => {
+  const alreadyOnboarded = await localForage.getItem(ONBOARDED_ITEM)
+  const adapterName = window.localStorage.getItem(
+    'cozy-client-pouch-link-adaptername'
+  )
+  return alreadyOnboarded && adapterName !== 'indexeddb'
+}
+
+export const pickAdapter = async () => {
+  const alreadyOnboarded = await localForage.getItem(ONBOARDED_ITEM)
+  const adapterName = window.localStorage.getItem(
+    'cozy-client-pouch-link-adaptername'
+  )
+  if (alreadyOnboarded && !adapterName) {
+    // The adapter is not set yet: an old adapter was used
+    return getOldAdapterName()
+  }
+  if (!alreadyOnboarded) {
+    // The user is not onboarded: there is no data to migrate
+    return 'indexeddb'
+  }
+  if (adapterName !== 'indexeddb') {
+    return getOldAdapterName()
+  }
+  return 'indexeddb'
+}
+
+export const initClient = async url => {
   const stackLink = new StackLink()
+  const adapter = await pickAdapter()
 
   const pouchLinkOptions = {
     doctypes: [DOCTYPE_FILES],
@@ -51,14 +95,21 @@ export const initClient = url => {
         ]
       }
     },
+    pouch: {
+      plugins: [getAdapterPlugin(adapter)],
+      options: {
+        adapter,
+        location: 'default'
+      }
+    },
     initialSync: true
   }
 
   if (isMobileApp() && isIOSApp()) {
     pouchLinkOptions.pouch = {
-      plugins: [require('pouchdb-adapter-cordova-sqlite')],
+      plugins: [getAdapterPlugin(adapter)],
       options: {
-        adapter: 'cordova-sqlite',
+        adapter,
         location: 'default'
       }
     }
